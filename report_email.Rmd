@@ -1,0 +1,60 @@
+---
+title: "Alert: AZMet stations not reporting!"
+date: "`r Sys.Date()`"
+output: blastula::blastula_email
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = "asis")
+library(dplyr)
+library(tidyr)
+```
+
+Some sensors or stations are not reporting data as of `r Sys.Date()`.
+```{r eval=FALSE, include=FALSE}
+## This chunk is for interactive testing locally.  Don't publish with this enabled
+
+# st_miss <- character()
+st_miss <- c("Tucson", "Pima")
+# sen_miss <- tibble::tibble()
+sen_miss <- structure(list(meta_station_id = c("az42", "az43"), meta_station_name = c("Wellton ETo", 
+"Yuma Valley ETo"), datetime = structure(c(19668, 19668), class = "Date"), 
+    precip_total_in = c(NA_real_, NA_real_), precip_total_mm = c(NA_real_, 
+    NA_real_)), row.names = c(NA, -2L), class = c("tbl_df", "tbl", 
+"data.frame"), i = "*", l = "*", s = "*", t = "daily")
+```
+
+### Stations
+
+```{r}
+if (length(st_miss) == 0) {
+    cat("All stations reporting")
+} else {
+  cat("⚠️ Not Reporting: \n \n")
+    glue::glue("- {st_miss}") |> 
+      glue::glue_collapse(sep = "\n")
+}
+```
+
+### Sensors
+
+```{r}
+if (nrow(sen_miss) == 0) {
+  cat("All reporting")
+} else {
+  cat("⚠️ Missing data:\n")
+  sen_miss |> 
+    # exclude stations where ALL data is missing for this
+    filter(!meta_station_name %in% st_miss) |> 
+    #format for email attachment
+    pivot_longer(c(-meta_station_id, -meta_station_name, -datetime), names_to = "missing_vars") |> 
+    filter(is.na(value)) |> 
+    #remove some calculated values?
+    # filter(stringr::str_ends(missing_vars, c("F"), negate = TRUE)) |> 
+    select(-value) |> 
+    group_by(meta_station_name) |> 
+    summarise(missing_vars = glue::glue_collapse(missing_vars, sep = ", ")) |> 
+    gt::gt() #can add more formatting later if desired with `gt`
+}
+```
+

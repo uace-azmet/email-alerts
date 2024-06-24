@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r include=FALSE}
+```{r setup, include=FALSE}
 library(blastula)
 library(azmetr)
 library(dplyr)
@@ -30,7 +30,7 @@ sen_miss <-
   #these will always be NA since these stations don't have soil probes
   mutate(across(
     starts_with("temp_soil"),
-    \(x) ifelse(meta_station_id %in% c("az28", "az40", "az42", "az43"), 0, x)
+    \(x) ifelse(meta_station_id %in% c("az28", "az40", "az42", "az43", "az44"), 0, x)
   )) |>
   #these will always be NA since there is no rain gauge there
   mutate(across(

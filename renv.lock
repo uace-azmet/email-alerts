@@ -1,7 +1,11 @@
 {
   "R": {
-    "Version": "4.3.1",
+    "Version": "4.3.3",
     "Repositories": [
+      {
+        "Name": "r-universe",
+        "URL": "https://cct-datascience.r-universe.dev"
+      },
       {
         "Name": "r-universe",
         "URL": "https://cct-datascience.r-universe.dev"
@@ -83,7 +87,7 @@
     },
     "azmetr": {
       "Package": "azmetr",
-      "Version": "0.2.1.9000",
+      "Version": "0.3.0.9000",
       "Source": "Repository",
       "Repository": "https://cct-datascience.r-universe.dev",
       "Requirements": [
@@ -99,7 +103,7 @@
         "tibble",
         "tidyselect"
       ],
-      "Hash": "6f013e0d7b58e0633aaa996231aa6044"
+      "Hash": "792fdf0bf734725229b73bc2ce7e2990"
     },
     "base64enc": {
       "Package": "base64enc",
@@ -368,14 +372,14 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.6.2",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e"
+      "Hash": "e0b3a53876554bd45879e596cdb10a52"
     },
     "gt": {
       "Package": "gt",

@@ -1,0 +1,12 @@
+name: azmet-email-alerts3
+title: azmet-email-alerts
+username: ericrscott
+account: ericrscott
+server: viz.datascience.arizona.edu
+hostUrl: https://viz.datascience.arizona.edu/__api__
+appId: 1089
+bundleId: 5440
+url: https://viz.datascience.arizona.edu:443/content/4fdf4a05-55ea-4195-91f4-4a8512d35b26/
+version: 1
+asMultiple: TRUE
+asStatic: FALSE
